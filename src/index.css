@@ -1,0 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+main {
+  block-size: 100vh;
+  contain: inline-size;
+}
+
+#container {
+  block-size: 100%;
+}
+
+div[role='gridcell'],
+div[role='columnheader'] {
+  border-inline-end: 1px solid var(--rdg-border-color);
+}
+
+div[role='columnheader'] > * {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
