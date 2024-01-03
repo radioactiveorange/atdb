@@ -95,17 +95,17 @@ export const defaultColumns = [
     name: '',
     minWidth: 30,
     width: 30,
-    colSpan(args) {
+    colSpan(args: any) {
       return args.type === 'ROW' && args.row.type === 'DETAIL' ? 3 : undefined
     },
-    cellClass(row) {
+    cellClass(row: any) {
       return row.type === 'DETAIL'
         ? `
             padding: 24px;
           `
         : undefined
     },
-    renderCell({ row, tabIndex, onRowChange }) {
+    renderCell({ row, tabIndex, onRowChange }: any) {
       if (row.type === 'DETAIL') {
         // return <ProductGrid parentId={row.parentId} direction={direction} />;
         return <></>
