@@ -1,4 +1,6 @@
-# andors-table
+# ATDB
+
+Andor's Trail DB - this is a recreation of Reizy's Andor's Trail Directory
 
 ## Running locally
 
@@ -34,4 +36,3 @@ npm run dev
 1.  `make gen`: Render TMS to JPG for global map pages. Yes, it really takes a long time. (You can run `make gen_grave` to render only one map 'graveyard1' for test). Execute 1602.92s in my MBP.
 1.  `make run`: Starting local development server.
 1.  `npm run build`: Generate production build.
-<!-- 7. To make route from any pages to index.html I use "build.bat" -->
