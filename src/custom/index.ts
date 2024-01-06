@@ -1,1 +1,1 @@
-export * from './ArmorCards'
+export * from './ArmorList'

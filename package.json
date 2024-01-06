@@ -17,7 +17,6 @@
     "atob": "^2.1.2",
     "autoprefixer": "^10.4.16",
     "canvas": "^2.11.2",
-    "daisyui": "^4.4.23",
     "fast-sort": "^3.4.0",
     "fast-xml-parser": "^4.3.2",
     "fs-extra": "^11.2.0",

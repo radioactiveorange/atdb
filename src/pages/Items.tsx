@@ -14,7 +14,7 @@ import {
 } from '@/data'
 import { useAtomValue } from 'jotai'
 import { useLocation } from 'react-router-dom'
-import { ArmorCards } from '../custom'
+import { ArmorList } from '../custom'
 
 export const Items = () => {
   const armors = useAtomValue(bodyAtom)
@@ -34,7 +34,7 @@ export const Items = () => {
 
   switch (item) {
     case ItemType.armor:
-      return <ArmorCards items={armors} />
+      return <ArmorList items={armors} />
     // return <ItemsDataGrid items={armors} />
     case ItemType.weapon:
       return <ItemsDataGrid items={weapons} />

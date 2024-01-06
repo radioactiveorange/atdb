@@ -6,6 +6,15 @@ interface Props {
   page: string
 }
 
+interface TabProps {
+  active: boolean
+  children: any
+}
+
+const Tab = ({ active, children }: TabProps) => {
+  return <li class={`p-2 dark:border-slate-600 ${active ? 'dark:bg-cyan-600 dark:text-slate-950' : ''}`}>{children}</li>
+}
+
 export const SubNav = ({ page }: Props) => {
   const currentPage = page.split('/')[1]
 
@@ -21,15 +30,21 @@ export const SubNav = ({ page }: Props) => {
   if (!subMenuItems || subMenuItems.length === 0) return <></>
 
   return (
-    <div className="flex justify-center w-full">
-      <div role="tablist" className="tabs tabs-boxed flex flex-wrap justify-center tabs-sm md:tabs-md w-full">
-        {subMenuItems &&
-          subMenuItems.map(({ path, label }) => (
-            <Link role="tab" to={`${currentPage}/${path}`} className={`tab ${page.includes(path) ? 'tab-active' : ''}`}>
-              {label}
-            </Link>
-          ))}
-      </div>
+    <div class="border border-x-0 dark:border-slate-600">
+      <ul className="overflow-x-auto grid grid-flow-col divide-x">
+        {subMenuItems.map(({ path, label }) => {
+          const active = page.includes(path)
+          return (
+            <Tab active={active}>
+              <Link to={`${currentPage}/${path}`}>
+                <div class="flex flex-col justify-center items-center">
+                  <span class="text-xs sm:font-bold sm:text-base">{label}</span>
+                </div>
+              </Link>
+            </Tab>
+          )
+        })}
+      </ul>
     </div>
   )
 }

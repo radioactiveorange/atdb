@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+body,
+input,
+select {
+  @apply dark:bg-slate-700 dark:text-slate-200;
+}
+
 main {
   block-size: 100vh;
   contain: inline-size;
@@ -9,6 +15,7 @@ main {
 
 #container {
   block-size: 100%;
+  overflow: hidden;
 }
 
 div[role='gridcell'],
