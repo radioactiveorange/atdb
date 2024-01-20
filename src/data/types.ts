@@ -18,6 +18,10 @@ export type Item = {
   conv_links: any
   displaytype: string
   equipEffect: EquipEffect
+  hitEffect?: HitEffect
+  killEffect?: KillEffect
+  hitReceivedEffect?: HitReceivedEffect
+  useEffect?: UseEffect
   iconBg: number
   iconID: string
   id: string
@@ -42,6 +46,28 @@ type EquipEffect = {
   increaseCriticalSkill: number
   setCriticalMultiplier: number
   increaseDamageResistance: number
+  addedConditions: ConditionLink[]
+}
+
+type HitEffect = {
+  conditionsTarget: any
+  conditionsSource: any
+  increaseCurrentHP: any
+}
+
+type KillEffect = {
+  conditionsSource: any
+  increaseCurrentHP: any
+  increaseCurrentAP: any
+}
+
+type HitReceivedEffect = {
+  conditionsSource: any
+  conditionsTarget: any
+}
+
+type UseEffect = {
+  conditionsSource: any
 }
 
 export type CategoryLink = {
@@ -50,6 +76,23 @@ export type CategoryLink = {
   inventorySlot: string
   name: string
   size: string
+}
+
+export type ConditionLink = {
+  condition: string
+  magnitude: number
+  link: Condition
+}
+
+export type Condition = {
+  abilityEffect: any
+  category: string
+  iconBg: number
+  iconID: string
+  id: string
+  links: any
+  name: string
+  rootLink: string
 }
 
 export enum ItemType {

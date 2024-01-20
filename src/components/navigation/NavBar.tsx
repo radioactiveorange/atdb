@@ -22,7 +22,7 @@ const Tab = ({ active, first, last, children }: TabProps) => {
 
 export const NavBar = ({ page }: Props) => {
   return (
-    <nav class="mt-[4px] border rounded-t-lg dark:border-slate-500">
+    <nav class="mt-[2px] mr-[1px] border rounded-t-lg dark:border-slate-500">
       <ul className="grid grid-cols-7 divide-x">
         {menuItems.map(({ label, path, icon }, index) => {
           const active = page.includes(path)

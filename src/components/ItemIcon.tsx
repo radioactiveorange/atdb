@@ -1,9 +1,10 @@
-import { Item } from '@/data'
 import { useEffect, useState } from 'react'
 import { serverURL } from '../lib'
 
 type Props = {
-  item: Item
+  iconID: string
+  iconBg?: number
+  displaytype?: string
 }
 
 // const custom: any = {
@@ -29,13 +30,13 @@ const getPosition = (index: number, width: number, d: { x: number; y: number }) 
   return { x, y }
 }
 
-export const ItemIcon = ({ item }: Props) => {
+export const ItemIcon = ({ iconID, iconBg, displaytype }: Props) => {
   const [style1, setStyle1] = useState({})
   const [src, setSrc] = useState('')
   const [position, setPosition] = useState({ x: 0, y: 0 })
 
   useEffect(() => {
-    const tmp = item.iconID?.split(':')
+    const tmp = iconID?.split(':')
     const file = tmp[0]
     const index = tmp[1]
     const src = getSrc(file)
@@ -49,17 +50,17 @@ export const ItemIcon = ({ item }: Props) => {
     }
     image.src = src as string
     setSrc(src as string)
-  }, [item.iconID])
+  }, [iconID])
 
   useEffect(() => {
-    if (item) {
+    if (iconBg) {
       let style = {}
-      if (item.iconBg !== 1) {
+      if (iconBg !== 1) {
         style = {
           width: '32px',
           height: '32px',
           backgroundImage: `url('${serverURL}/drawable/ui_selections.png')`,
-          backgroundPosition: `${item.iconBg * 32}px 0px`,
+          backgroundPosition: `${iconBg * 32}px 0px`,
         }
       } else {
         style = {
@@ -69,15 +70,10 @@ export const ItemIcon = ({ item }: Props) => {
       }
       setStyle1(style)
     }
-  }, [item])
+  }, [iconBg])
 
   return (
-    // <div style={{ width: 16, height: 16 }} className="flex">
-    // 	<img
-    // 		style={{ objectFit: "none", objectPosition: `${-position.x}px ${-position.y}px`, width: 32, height: 32 }}
-    // 		src={src}></img>
-    // </div>
-    <div className="tooltip tooltip-right relative" data-tip={item.displaytype}>
+    <div className="relative" data-tip={displaytype}>
       <div style={style1} />
       <div
         className="absolute left-0 top-0"

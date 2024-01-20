@@ -140,7 +140,7 @@ const getSortBy = (item: Item, category: string) => {
 }
 
 export const ArmorList = ({ items }: Props) => {
-  const [sortCategory, setSortCategory] = useState('')
+  const [sortCategory, setSortCategory] = useState('name')
   const [sortType, setSortType] = useState(0)
 
   const changeCategory = (e: any) => {

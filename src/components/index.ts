@@ -1,3 +1,6 @@
+export * from './ArmorCard'
+export * from './ArmorList'
+export * from './CellExpanderFormatter'
 export * from './ErrorPage'
 export * from './ItemIcon'
 export * from './ItemsDataGrid'
