@@ -9,26 +9,26 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "preact": "^10.19.3"
+    "preact": "^10.27.1"
   },
   "devDependencies": {
-    "@preact/preset-vite": "^2.7.0",
-    "@types/node": "^20.10.5",
+    "@preact/preset-vite": "^2.9.1",
+    "@types/node": "^20.19.11",
     "atob": "^2.1.2",
-    "autoprefixer": "^10.4.16",
-    "canvas": "^2.11.2",
-    "fast-sort": "^3.4.0",
+    "autoprefixer": "^10.4.21",
+    "canvas": "^3.2.0",
+    "fast-sort": "^3.4.1",
     "fast-xml-parser": "^4.3.2",
-    "fs-extra": "^11.2.0",
-    "jotai": "^2.6.0",
+    "fs-extra": "^11.3.1",
+    "jotai": "^2.13.1",
     "pako": "^2.1.0",
-    "postcss": "^8.4.32",
-    "prettier-plugin-tailwindcss": "^0.5.9",
-    "react-data-grid": "^7.0.0-beta.41",
+    "postcss": "^8.4.49",
+    "prettier-plugin-tailwindcss": "^0.5.14",
+    "react-data-grid": "^7.0.0-beta.57",
     "react-icons": "^4.12.0",
     "react-router-dom": "^6.21.1",
     "tailwindcss": "^3.4.0",
-    "typescript": "^5.2.2",
-    "vite": "^5.0.8"
+    "typescript": "^5.9.2",
+    "vite": "^5.4.19"
   }
 }

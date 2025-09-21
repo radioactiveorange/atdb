@@ -1,41 +1,36 @@
-const fs = require('fs')
-const { createCanvas, loadImage } = require('canvas')
+import fs from 'fs'
 
-const { XMLParser } = require('./xmlParser.js')
-const { parseXmlMap } = require('./old-map-parser.js')
+function getVersion() {
+  try {
+    const manifestPath = '../andors-trail/AndorsTrail/app/src/main/AndroidManifest.xml'
+    console.log(`Reading version from: ${manifestPath}`)
 
-const ZOOM = 32
-const ZOOM_OUT = 12
+    const data = fs.readFileSync(manifestPath, 'utf8')
 
-var counter = 0
-var counterSize = 0
+    // Simple regex to extract version
+    const versionMatch = data.match(/android:versionName="([^"]+)"/)
 
-function saveVersion(xml) {
-  const buffer = 'REACT_APP_AT_VERSION=' + xml.attributes['android:versionName']
-  fs.writeFileSync('./.env', buffer)
-}
+    if (versionMatch) {
+      const version = versionMatch[1]
+      console.log(`Andor's Trail version: ${version}`)
 
-function getXmlData(fileName, thenDo) {
-  fs.readFile(fileName, 'utf8', (err, data) => {
-    if (!data) {
-      console.warn("'" + fileName + "' doesn't exist")
-      return
+      // Save to .env.local
+      const envContent = `VITE_AT_VERSION=${version}\n`
+      fs.writeFileSync('.env.local', envContent)
+      console.log('Version saved to .env.local')
+
+      return version
+    } else {
+      console.warn('Could not find android:versionName in manifest')
+      return null
     }
-    var str = data.replace(/<!--.*-->/g, '')
-    thenDo(str)
-  })
-}
-
-const getXml = (name) => {
-  const thenDo = (xmlString) => {
-    var parser = new XMLParser()
-    var myXml = parser.parseFromString(xmlString)
-    saveVersion(myXml)
+  } catch (error) {
+    console.error('Failed to read version:', error.message)
+    return null
   }
-  getXmlData(resource, thenDo)
 }
 
-const generateAll = (tmxFolder) => {}
+// Always run when script is executed
+getVersion()
 
-const resource = '../andors-trail/AndorsTrail/app/src/main/AndroidManifest.xml'
-getXml(resource)
+export { getVersion }

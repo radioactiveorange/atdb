@@ -4,6 +4,11 @@ import { AndorsData, ItemType } from '.'
 
 export const databaseAtom = atom<AndorsData | undefined>(undefined)
 export const itemsAtom = selectAtom(databaseAtom, (db) => db?.items)
+export const monstersAtom = selectAtom(databaseAtom, (db) => db?.monsters)
+export const npcsAtom = selectAtom(databaseAtom, (db) => db?.npcs)
+export const conditionsAtom = selectAtom(databaseAtom, (db) => db?.actorconditions)
+export const questsAtom = selectAtom(databaseAtom, (db) => db?.quests)
+export const categoriesAtom = selectAtom(databaseAtom, (db) => db?.itemcategories)
 export const bodyAtom = selectAtom(
   itemsAtom,
   (items) => items?.filter((i) => i.categoryLink.inventorySlot === ItemType.armor)

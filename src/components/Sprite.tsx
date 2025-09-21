@@ -9,7 +9,7 @@ interface Props {
   height?: number
 }
 
-export const Sprite = ({ iconID, iconBg = 1, displaytype, width = 32, height = 32 }: Props) => {
+export const Sprite = ({ iconID, iconBg = 1, width = 32, height = 32 }: Props) => {
   const [x, setX] = useState(0)
   const [y, setY] = useState(0)
   const [bgImage, setBGImage] = useState('')

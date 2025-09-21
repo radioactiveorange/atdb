@@ -163,7 +163,7 @@ export const ArmorList = ({ items }: Props) => {
     <div className="flex flex-col overflow-auto flex-1 text-sm divide-y ">
       <div class="sticky top-0 dark:bg-slate-700 z-[2] grid grid-flow-col gap-2 p-1 shadow-lg">
         <input type="search" placeholder="Search" class="rounded-sm h-8 px-2 dark:bg-slate-600" />
-        <select placeholder="Sort" onChange={(e) => changeCategory(e)} class="p-1 rounded-sm dark:bg-slate-600">
+        <select onChange={(e) => changeCategory(e)} class="p-1 rounded-sm dark:bg-slate-600">
           {sortCategories.map(({ label, value }) => (
             <option value={value}>{label}</option>
           ))}

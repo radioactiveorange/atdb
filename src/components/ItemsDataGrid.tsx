@@ -2,7 +2,7 @@ import { Item } from '@/data'
 import { useMemo, useState } from 'preact/hooks'
 
 import { ItemIcon } from '@/components'
-import DataGrid, { SortColumn } from 'react-data-grid'
+import { DataGrid, SortColumn } from 'react-data-grid'
 import { CellExpanderFormatter } from './CellExpanderFormatter'
 
 interface Row {
@@ -342,18 +342,21 @@ export const ItemsDataGrid = ({ items, columns = defaultColumns }: Props) => {
   }, [rows, sortColumns])
 
   return (
-    <DataGrid
-      className="rdg-dark data-grid flex-1"
-      columns={columns}
-      rows={sortedRows}
-      rowKeyGetter={rowKeyGetter}
-      defaultColumnOptions={{
-        sortable: true,
-        resizable: true,
-      }}
-      sortColumns={sortColumns}
-      onSortColumnsChange={setSortColumns}
-      rowHeight={42}
-    />
+    <div className="flex-1 min-h-0">
+      <DataGrid
+        className="rdg-dark data-grid"
+        style={{ height: '100%' }}
+        columns={columns}
+        rows={sortedRows}
+        rowKeyGetter={rowKeyGetter}
+        defaultColumnOptions={{
+          sortable: true,
+          resizable: true,
+        }}
+        sortColumns={sortColumns}
+        onSortColumnsChange={setSortColumns}
+        rowHeight={42}
+      />
+    </div>
   )
 }

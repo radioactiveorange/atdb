@@ -1,4 +1,4 @@
-import { ArmorList, ItemsDataGrid } from '@/components'
+import { ResponsiveList, ItemsDataGrid } from '@/components'
 import {
   ItemType,
   bodyAtom,
@@ -14,6 +14,19 @@ import {
 } from '@/data'
 import { useAtomValue } from 'jotai'
 import { useLocation } from 'react-router-dom'
+import { MobileItemCard } from '@/components'
+
+// Sort options for items
+const itemSortOptions = [
+  { label: 'Name', value: 'name' },
+  { label: 'Price', value: 'baseMarketCost' },
+  { label: 'Category', value: 'categoryLink.name' },
+  { label: 'HP Bonus', value: 'equipEffect.increaseMaxHP' },
+  { label: 'AP Bonus', value: 'equipEffect.increaseMaxAP' },
+  { label: 'Attack Damage', value: 'equipEffect.increaseAttackDamage' },
+  { label: 'Attack Chance', value: 'equipEffect.increaseAttackChance' },
+  { label: 'Block Chance', value: 'equipEffect.increaseBlockChance' },
+]
 
 export const Items = () => {
   const armors = useAtomValue(bodyAtom)
@@ -31,28 +44,39 @@ export const Items = () => {
 
   const item = location.pathname.split('/').pop()
 
-  switch (item) {
-    case ItemType.armor:
-      return <ArmorList items={armors} />
-    case ItemType.weapon:
-      return <ItemsDataGrid items={weapons} />
-    case ItemType.shield:
-      return <ItemsDataGrid items={shields} />
-    case ItemType.helm:
-      return <ItemsDataGrid items={helms} />
-    case ItemType.gloves:
-      return <ItemsDataGrid items={gloves} />
-    case ItemType.boots:
-      return <ItemsDataGrid items={boots} />
-    case ItemType.ring:
-      return <ItemsDataGrid items={rings} />
-    case ItemType.necklace:
-      return <ItemsDataGrid items={necklaces} />
-    case ItemType.usable:
-      return <ItemsDataGrid items={usables} />
-    case ItemType.other:
-      return <ItemsDataGrid items={others} />
-    default:
-      return <></>
+  const getItemsForType = (type: string) => {
+    switch (type) {
+      case ItemType.armor: return armors
+      case ItemType.weapon: return weapons
+      case ItemType.shield: return shields
+      case ItemType.helm: return helms
+      case ItemType.gloves: return gloves
+      case ItemType.boots: return boots
+      case ItemType.ring: return rings
+      case ItemType.necklace: return necklaces
+      case ItemType.usable: return usables
+      case ItemType.other: return others
+      default: return []
+    }
   }
+
+  const items = getItemsForType(item || '')
+
+  return (
+    <ResponsiveList
+      entities={items}
+      entityName="items"
+      sortOptions={itemSortOptions}
+      searchFields={['name', 'categoryLink.name']}
+      renderCard={(item) => (
+        <MobileItemCard
+          item={item}
+          onClick={() => {/* Handle item click */}}
+        />
+      )}
+      renderGrid={(items) => (
+        <ItemsDataGrid items={items} />
+      )}
+    />
+  )
 }

@@ -158,6 +158,54 @@ const linkTemp = () => {
       item.type = droplist.type
     })
   })
+
+  // Create enhanced NPCs by linking monsters with conversations
+  temp.npcs = []
+  temp.monsters.forEach((monster: any) => {
+    if (monster.monsterClass === 'humanoid' && monster.phraseID) {
+      // This is an NPC - enhance it with conversation data
+      const npc = {
+        ...monster,
+        conversations: temp.conversations.filter((conv: any) => 
+          conv.id.startsWith(monster.phraseID)
+        ),
+        isNPC: true,
+        location: findNPCLocation(monster.id, temp),
+        merchantItems: monster.droplistID ? getMerchantItems(monster.droplistID, temp) : []
+      }
+      temp.npcs.push(npc)
+    }
+  })
+}
+
+// Helper function to find NPC location from TMX files (simplified for now)
+const findNPCLocation = (npcId: string, temp: any): string => {
+  // For now, return the spawn group as location
+  // In a full implementation, we'd parse TMX files to find the actual map name
+  const monster = temp.monsters.find((m: any) => m.id === npcId)
+  return monster?.spawnGroup || 'Unknown'
+}
+
+// Helper function to get merchant items
+const getMerchantItems = (droplistID: string, temp: any): any[] => {
+  const droplist = temp.maps.droplists[droplistID]
+  if (droplist && droplist.items) {
+    return droplist.items.map((item: any) => {
+      if (!item.link) return null
+      // Extract only the essential fields to avoid circular references
+      return {
+        id: item.link.id,
+        name: item.link.name,
+        iconID: item.link.iconID,
+        baseMarketCost: item.link.baseMarketCost,
+        cost: item.cost || item.link.baseMarketCost,
+        quantity: item.quantity || -1,
+        category: item.link.category,
+        displaytype: item.link.displaytype
+      }
+    }).filter(Boolean)
+  }
+  return []
 }
 
 const getItemIconBg = (o: any) => {

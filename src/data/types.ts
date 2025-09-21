@@ -7,7 +7,23 @@ export type AndorsData = {
   items: Item[]
   maps: any[]
   monsters: any[]
+  npcs: NPC[]
+  quests: any[]
   scripts: any[]
+}
+
+export type NPC = {
+  id: string
+  name: string
+  iconID: string
+  phraseID?: string
+  droplistID?: string
+  monsterClass: string
+  conversations: any[]
+  isNPC: boolean
+  location: string
+  merchantItems: any[]
+  unique?: number
 }
 
 export type Item = {
